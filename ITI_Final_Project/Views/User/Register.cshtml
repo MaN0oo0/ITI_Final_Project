@@ -1,0 +1,96 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.title = "Register";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+@model Customer
+    <div class="row justify-content-between">
+
+
+        <div class=" col-8">
+
+            <form class="col-12 m-4 p-5" method="post" asp-action="Register" asp-controller="User" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger" style="font-weight:bolder"></div>
+
+
+
+                <div class="col-6 p-4">
+                    <label asp-for="Name">Name</label>
+                    <input type="text" asp-for="Name" placeholder="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-6 p-4">
+                    <label asp-for="Phone_Number">Phone Number</label>
+                    <input type="text" asp-for="Phone_Number" placeholder="Phone Number" class="form-control">
+                    <span asp-validation-for="Phone_Number" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="National_Id">Catolog</label>
+                    <select asp-for="National_Id" class="form-control" asp-items="@(SelectList)ViewBag.Nation">
+                        <option value="" class="text-muted">Chose Nationality</option>
+                    </select>
+                    <span asp-validation-for="National_Id" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Notional_Number">Notional Number</label>
+                    <input type="text" asp-for="Notional_Number" placeholder="National Number" class="form-control">
+                    <span asp-validation-for="Notional_Number" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Email">Email</label>
+                    <input type="email" asp-for="Email" placeholder="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Password">Password</label>
+                    <input type="password" asp-for="Password" placeholder="Password" class="form-control">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Confirm_Password">Confirm Password</label>
+                    <input type="password" asp-for="Confirm_Password" placeholder="Confirm_Password" class="form-control">
+                    <span asp-validation-for="Confirm_Password" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <div class="custom-file">
+                        <input type="file" asp-for="Img" class="custom-file-input"  />
+                        <label asp-for="Img" class="custom-file-label"></label><br />
+                        <span asp-validation-for="Img" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                    <div class="col-6 p-4">
+                        <input type="submit" class="btn btn-success" value="Add" />
+                        <input type="reset" class="btn btn-warning" value="Clear" />
+                        <a asp-action="Index" asp-controller="User" class="btn btn-primary">Return</a>
+                    </div>
+</form>
+        </div>
+        <div class="col-4 d-none " id="poster-container">
+            <img src="" />
+        </div>
+    </div>
+    @section Scripts{
+
+        <script src="~/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#Img').on('change', function () {
+        var SelectedFile = $(this).val().split('\\').pop();
+        $(this).siblings('label').text(SelectedFile);
+
+        var posterContainer = $('#poster-container');
+        posterContainer.removeClass('d-none');
+
+        var Image = window.URL.createObjectURL(this.files[0]);
+        posterContainer.find('img').attr('src', Image);
+
+    });
+</script>
+    }

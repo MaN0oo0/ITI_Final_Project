@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ ViewBag.title = "Our Room";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+@model List<Room>
+<div class="back_re">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h2>Our Room</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- our_room -->
+@{if (Model==null)
+    {
+        <div class="alert alert-warning" role="alert">
+            <i class="bi bi-exclamation-triangle"></i>
+            No Rooms Founded
+        </div>
+
+    }
+    else
+    {
+
+
+
+        <div class="our_room">
+            <div class="container">
+           
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <p class="margin_0">Lorem Ipsum available, but the majority have suffered </p>
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                    <div class="col-md-4 col-sm-6">
+                        <div id="serv_hover" class="room">
+                            <div class="room_img">
+                                <figure><img src="~/Rooms/@item.Img" alt="#" /></figure>
+                            </div>
+                            <div class="bed_room">
+                                <p style="word-break:break-word">@item.Description </p>
+                                <span style="font-size:20px"><sub class="fs-4" style="font-size:20px"><del class="text-danger fw-bold fs-5">12$</del></sub>@item.Price</span>
+                            </div>
+                            <center>
+                                <a asp-page-handler="Delete" asp-action="Delete" asp-controller="Home" class="btn btn-danger text-white fs-4" onclick="return confirm(` Do You Want To Delete Form Data `)" asp-route-Id="@item.Room_number">Delete</a>
+                            </center>
+                        </div>
+                    </div>
+                    }
+                
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<!-- end our_room -->

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Links Hub</h1>
+
+<table class="table table-striped table-hover m-2 p-md-4">
+    <thead>
+        <tr>
+            <th>
+                About
+            </th>
+            <th>
+                Our Room
+            </th>
+            <th>
+                Gallery
+            </th>
+            <th>
+                Blog
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a class="btn btn-primary text-white fs-4" asp-controller="Home" asp-action="About">Viwe</a>
+                <a class="btn btn-warning text-white fs-4" asp-controller="Home" asp-action="About">Edite</a>
+
+            </td>
+            <td>
+                <a class="btn btn-primary text-white fs-4" asp-controller="Home" asp-action="OurRoom">Viwe</a>
+       
+                <a class="btn btn-success text-white fs-4" asp-controller="Opration" asp-action="Create_Room">Create</a>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

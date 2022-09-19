@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.title = "Order";
+}
+@model Room
+
+
+<div class="our_room ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage">
+                    <h2>Our Room</h2>
+                    <p>Lorem Ipsum available, but the majority have suffered </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="mt-4">
+    @{
+        @if (Model == null)
+        {
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle"></i>
+                No Rooms Founded
+            </div>
+
+        }
+
+    else
+    {
+        <div class="row justify-content-between col-md-12 w-100">
+            <div class="col-md-8">
+                <div id="serv_hover" class="room row justify-content-between">
+                    <div class="room_img">
+                        <figure><img src="~/images/room1.jpg" alt="#" /></figure>
+                    </div>
+                    <div class="bed_room col mt-5">
+                        <p>@Model.Description </p>
+                        <span style="font-size:20px"><sub class="fs-4" style="font-size:20px"><del class="text-danger fw-bold fs-5">12$</del></sub>@Model.Price</span>
+                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Order" )" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Opration" )">Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    }
+    </div>

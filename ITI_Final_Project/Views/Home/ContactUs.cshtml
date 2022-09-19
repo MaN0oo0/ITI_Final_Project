@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewBag.title = "Contact Us";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+@model Customer
+<div class="back_re">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h2>Contact Us</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  contact -->
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form id="request" class="main_form" method="post" asp-action="ContactUs" asp-controller="Home">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <input class="contactus" placeholder="Name" type="text" asp-for="Name">
+                            <input class="contactus" placeholder="Name" type="text" asp-for="Name">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="contactus" placeholder="Email" type="email" asp-for="Email">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="contactus" placeholder="Phone Number" type="text" asp-for="Phone_Number">
+                        </div>
+                        @*<div class="col-md-12">
+                            <textarea class="textarea" placeholder="Message" type="type" asp-for="Message" Message="Name">Message</textarea>
+                        </div>*@
+                        <div class="col-md-12">
+                            <button class="send_btn">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="map_main">
+                    <div class="map-responsive">
+<img  src="~/images/room1.jpg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end contact -->
