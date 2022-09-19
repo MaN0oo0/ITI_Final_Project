@@ -13,9 +13,9 @@ namespace ITI_Final_Project.Models
     {
         [Key]
         public int Reservatation_Number { get; set; }
-        [Column(TypeName = "date")]
+        [Column(TypeName = "date"),Required]
         public DateTime? Reservation_Date { get; set; }
-        [Column(TypeName = "date")]
+        [Column(TypeName = "date"), Required]
         public DateTime? Expiry_Date { get; set; }
         public int? Room_Number { get; set; }
         public int? Customer_Id { get; set; }

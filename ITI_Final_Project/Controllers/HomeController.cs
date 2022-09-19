@@ -48,6 +48,19 @@ namespace ITI_Final_Project.Controllers
             return View();
         }
 
+        public IActionResult Box()
+        {
+            var data = db.Contact_Us.Include(m=>m.Customer).ToList();
+            if (data != null)
+            {
+
+                return View(data);
+            }
+            else
+            {
+                return RedirectToAction("ContactUs");
+            }
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -72,24 +85,45 @@ namespace ITI_Final_Project.Controllers
         public IActionResult ContactUs()
         {
             int? Id = HttpContext.Session.GetInt32("UserId");
+          
             if (Id == null)
             {
                 return RedirectToAction("Login","User");
             }
             else
             {
-                var data = db.Customers.Where(n => n.Id == Id).FirstOrDefault();
-                return View(data);
+            
+                var contact = db.Contact_Us.FirstOrDefault();
+              
+                return View(contact);
            
             }
         }
-        public IActionResult Delete(int? Id)
+        [HttpPost]
+        public IActionResult ContactUs(Contact_U model)
         {
-           
-            var data = db.Rooms.Find(Id);
-            db.Remove(data);
-            db.SaveChanges();
-            return View();
+            if (model!=null)
+            {
+                int? x= HttpContext.Session.GetInt32("UserId"); 
+                var data = new Contact_U()
+                {
+                    Customer_Id =x,
+                    Message = model.Message
+                };
+                db.Contact_Us.Add(data);
+                db.SaveChanges();
+                return RedirectToAction("Box");
+            }
+            else return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult>Delete(int? Id)
+        {
+
+            var data =  await db.Rooms.FindAsync(Id);
+             db.Remove(data);
+            await db.SaveChangesAsync();
+             return View();
         }
     }
 }

@@ -3,6 +3,8 @@
 *@
 @{ ViewBag.title = "Our Room";
     Layout = "/Views/Shared/_Layout.cshtml";
+    Hotel_App db = new Hotel_App();
+    var data =db.Customers.Where(x => x.IsAdmin == true).FirstOrDefault();
 }
 @model List<Room>
 <div class="back_re">
@@ -32,37 +34,58 @@
 
         <div class="our_room">
             <div class="container">
-           
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="titlepage">
-                            <p class="margin_0">Lorem Ipsum available, but the majority have suffered </p>
+                @if (Context.Session.GetInt32("UserId") == null)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="titlepage">
+                                <span class="alert bg-light text-black fs-4">No Data Ples Login</span>
+                            </div>
                         </div>
-                    </div>
-                
-                </div>
 
-                <div class="row">
-                    @foreach (var item in Model)
-                    {
-                    <div class="col-md-4 col-sm-6">
-                        <div id="serv_hover" class="room">
-                            <div class="room_img">
-                                <figure><img src="~/Rooms/@item.Img" alt="#" /></figure>
-                            </div>
-                            <div class="bed_room">
-                                <p style="word-break:break-word">@item.Description </p>
-                                <span style="font-size:20px"><sub class="fs-4" style="font-size:20px"><del class="text-danger fw-bold fs-5">12$</del></sub>@item.Price</span>
-                            </div>
-                            <center>
-                                <a asp-page-handler="Delete" asp-action="Delete" asp-controller="Home" class="btn btn-danger text-white fs-4" onclick="return confirm(` Do You Want To Delete Form Data `)" asp-route-Id="@item.Room_number">Delete</a>
-                            </center>
-                        </div>
                     </div>
+                }
+                    @if (Context.Session.GetInt32("UserId") != null)
+                    {
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+
+
+
+                                <div class="col-md-4 col-sm-6">
+                                    <div id="serv_hover" class="room">
+                                        <div class="room_img">
+                                            <figure><img src="~/Rooms/@item.Img" alt="#" /></figure>
+                                        </div>
+                                        <div class="bed_room">
+                                            <p style="word-break:break-word">@item.Description </p>
+                                            <span style="font-size:20px"><sub class="fs-4" style="font-size:20px"><del class="text-danger fw-bold fs-5">12$</del></sub>@item.Price</span>
+                                        </div>
+                                        @if (Context.Session.GetInt32("UserId") == data.Id)
+                                        {
+
+
+                                            <center>
+                                                <a asp-action="OurRoom" asp-route-Room_number="@item.Room_number" class="btn btn-danger text-white btn-sm" onclick="return confirm(`Are You sure to Delete `)">Delete</a>
+                                            </center>
+                                        }
+                                        <center>
+                                            <a class="btn btn-primary text-white fs-4" asp-route-Id="@item.Room_number" asp-action="Reversation" asp-controller="Opration">Order</a>
+                                        </center>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+
+
+
+                        </div>
                     }
-                
                 </div>
-            </div>
         </div>
     }
 }

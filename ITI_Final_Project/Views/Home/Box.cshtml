@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.title = "Box";
+}
+@model List<Contact_U>
+<div class="justify-content-center d-flex">
+<h1 class="btn btn-info w-50 " style="margin:20pX auto" >Box</h1>
+
+</div>
+
+<div class="container">
+
+    <div class="row" id="cc">
+        @foreach (var item in Model)
+        {
+            <div class="card col-md-3 m-1" style="width: 18rem;">
+                <img src="~/Imgs/@item.Customer.Img" class="card-img-top" alt="@item.Customer.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Customer.Name</h5>
+                    <p class="card-text">@item.Message</p>
+                    <a  class="btn btn-danger bb text-white" >Delete</a>
+                </div>
+            </div>
+        }
+        </div>
+</div>
+@section Scripts{ 
+    @*<script>
+        var btn = document.querySelector(".bb");
+        var content = document.getElementById("cc");
+        btn.addEventListener('click', function () {
+           
+            content.style.display = "hidden";
+        });
+    </script>*@
+}

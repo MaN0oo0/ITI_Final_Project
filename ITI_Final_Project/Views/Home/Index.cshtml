@@ -273,56 +273,7 @@
 </div>
 <!-- end blog -->
 <!--  contact -->
-@if (Context.Session.GetInt32("UserId") != null)
-{
 
-    <div class="contact" for="ff">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>Contact Us</h2>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    @model Contact_U
-                    <form method="post" asp-action="Index" asp-controller="Home" class="main_form">
-                        <div class="row">
-                            @*<div class="col-md-12 ">
-                                    <input class="contactus" placeholder="Name" type="text" asp-for="Name">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Email" type="email" asp-for="Email">
-                                </div>
-                                <div class="col-md-12">
-                                    <input class="contactus" placeholder="Phone Number" type="text" asp-for="Phone_Number">
-                                </div>*@
-                            <div class="col-md-12">
-                                <textarea class="textarea" placeholder="Message" type="text" asp-for="Message">Message</textarea>
-                            </div>
-                            <div class="col-md-12 Contact">
-                                <button class="send_btn">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="map_main">
-                        <div class="map-responsive">
-                            <img />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-    <!-- end contact -->
     @section Scripts{
 
     }

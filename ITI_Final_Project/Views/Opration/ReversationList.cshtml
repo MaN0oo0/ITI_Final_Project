@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.title = "ReversationList";
+}
+
+<h1>ReversationList</h1>
+
+@model List<Revevarstion>
+
+<div class="container">
+    @foreach (var item in Model)
+    {<div class="card m-2">
+    <div class="card-body">
+
+
+        <h2><strong>Name:</strong>@item.Customer.Name</h2>
+        <br />
+        <span>
+            <strong>RoomNumber:</strong>	@item.Room_NumberNavigation.Room_number
+        </span>
+        <br />
+        <span><strong>Expiry_Date:</strong>@item.Expiry_Date</span>
+    </div>
+</div>
+    }
+
+</div>

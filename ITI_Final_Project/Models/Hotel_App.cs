@@ -79,8 +79,6 @@ namespace ITI_Final_Project.Models
 
             modelBuilder.Entity<Revevarstion>(entity =>
             {
-                entity.Property(e => e.Reservatation_Number).ValueGeneratedNever();
-
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Revevarstions)
                     .HasForeignKey(d => d.Customer_Id)

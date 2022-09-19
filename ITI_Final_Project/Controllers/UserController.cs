@@ -81,7 +81,7 @@ namespace ITI_Final_Project.Controllers
             return View();
         }
         [HttpPost]
-        [ActionName("Register")]
+     
         public IActionResult Register(Customer model,IFormFile Img)
         {
             if (ModelState.IsValid)

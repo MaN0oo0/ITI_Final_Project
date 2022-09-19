@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 //Addiing Dependancy ==>
 builder.Services.AddDbContext<Hotel_App>();
 builder.Services.AddSession();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

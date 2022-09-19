@@ -21,11 +21,9 @@ namespace ITI_Final_Project.Models
         [StringLength(50)]
         public string Phone_number { get; set; }
         public int? Cleaner_Id { get; set; }
-        [StringLength(50),MaxLength(50),Required]
+        [StringLength(50)]
         public string Description { get; set; }
-        [Required,Range(20,30)]
         public double? Price { get; set; }
-        [Required]
         public string Img { get; set; }
 
         [ForeignKey("Cleaner_Id")]
