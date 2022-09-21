@@ -3,7 +3,7 @@
     ViewBag.title = "MyReversaion";
 }
 
-<h1>MyReversaion</h1>
+<h1 class="badge badge-primary p-4"style="font-size:25px" >MyReversaion</h1>
 
 
 
@@ -12,6 +12,16 @@
 @model List<Revevarstion>
 
 <div class="container">
+
+    @if (!Model.Any())
+	{
+        <div class="m-4 " style="margin:20px auto">
+		 <a class="alert alert-info text-black fs-5 w-100"style="font-size:20px;width:400px">No Data Here</a>
+
+        </div>
+	}
+
+
     @foreach (var item in Model)
     {<div class="card m-2">
             <div class="card-body">
@@ -20,14 +30,14 @@
                 <h2><strong>Name:</strong>@item.Customer.Name</h2>
                 <br />
                 <span>
-                    <strong>RoomNumber:</strong>	@item.Room_NumberNavigation.Room_number
+                    <strong>RoomNumber:</strong>	@item.Room_Number
                 </span>
                 <br />
                 <span><strong>Expiry_Date:</strong>@item.Expiry_Date</span>
             </div>
     <center>
-        <a class="btn btn-danger btn-sm text-white">Delete</a>
-        <a class="btn btn-warning btn-sm text-white">Update</a>
+        <a class="btn btn-danger btn-sm text-white" asp-route-Id="@item.Reservatation_Number" asp-action="MyReversaion_Delete" asp-controller="Opration">Delete</a>
+        <a class="btn btn-warning btn-sm text-white" asp-route-Id="@item.Reservatation_Number" asp-action="MyReversaion_Update" asp-controller="Opration">Update</a>
     </center>
         </div>
     }

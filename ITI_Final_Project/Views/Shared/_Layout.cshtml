@@ -1,6 +1,8 @@
 ﻿
 @{
     Hotel_App db = new Hotel_App();
+    bool? isadmin = db.Customers.Where(m => m.IsAdmin == true).Any();
+    int? Id = Context.Session.GetInt32("UserId");
             }
 <!DOCTYPE html>
 <html lang="en">
@@ -66,29 +68,36 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExample04">
                                 <ul class="navbar-nav mr-auto">
-                                    @{ var data = db.Customers.Where(x => x.IsAdmin == true).FirstOrDefault();
-                                        if (Context.Session.GetInt32("UserId") == data.Id)
+                                    @{ 
+                                        if (Context.Session.GetInt32("UserId") != null)
                                         {
+                                            if (isadmin==true)
+                                            {
 
+                                    
                                             <li class="nav-item ">
                                                 <a class="nav-link" asp-action="index" asp-controller="home">Home</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fs-2" asp-controller="Home" asp-action="Box">Box</a>
+                                                <a class="nav-link fs-2" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Home")" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Box" )">Box</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fs-2" asp-controller="Opration" asp-action="Index">Operations</a>
+                                                <a class="nav-link fs-2" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Opration" )" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Index" )">Operations</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link fs-2" asp-controller="Opration" asp-action="ReversationList">ReversationList</a>
+                                                <a class="nav-link fs-2" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Opration" )" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "ReversationList" )">ReversationList</a>
+                                            </li>    
+                                            <li class="nav-item">
+                                                <a class="nav-link fs-2" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "User" )" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Index" )">Users</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" asp-action="LogOut" asp-controller="User">Log Out</a>
                                             </li>
-                                            var x = db.Customers.Where(x => x.Id == data.Id).Select(x => x.Name).FirstOrDefault();
+                                            var x = db.Customers.Where(x => x.Id == Id).Select(x => x.Name).FirstOrDefault();
                                             <li class="nav-item">
                                                 <a class="nav-link fs-1" style="font-size:10px" asp-action="Profile" asp-controller="User">@x</a>
                                             </li>
+                                            }
                                         }
 
                                         else
@@ -122,10 +131,14 @@
                                             }
                                             else
                                             {
-                                                <li class="nav-item">
-                                                    <a class="nav-link" asp-action="MyReversaion" asp-controller="Opration">MyReversaion</a>
-                                                </li>
-                                                int? Id = Context.Session.GetInt32("UserId");
+                                                if (isadmin == false)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" asp-action="MyReversaion" asp-controller="Opration">MyReversaion</a>
+                                                    </li>
+                                                }
+
+                                               
 
                                                 var x = db.Customers.Where(x => x.Id == Id).Select(x => x.Name).FirstOrDefault();
                                                 <li class="nav-item">

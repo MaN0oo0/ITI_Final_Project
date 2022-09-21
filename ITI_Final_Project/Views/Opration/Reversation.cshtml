@@ -1,16 +1,19 @@
 ﻿
+@model Revevarstion
 @{
     ViewBag.title = "Reversation";
-    int? x = ViewBag.Id;
+
+    Hotel_App db = new Hotel_App();
+    var data=db.Rooms.Where(m => m.Room_number == Model.Room_Number).FirstOrDefault();
 }
-@model Revevarstion
 <h1>Reversation</h1>
 <div class="container d-flex text-center col-md-5 h-50 ">
 
     <form class="book_now" method="post" asp-action="Reversation" asp-controller="Opration">
-        <input type="hidden" asp-for="@x" />
+        <input type="hidden" asp-for="Room_Number" />
         <input type="hidden" asp-for="Customer_Id" />
         <div class="row p-4">
+            
             <div class="col-md-12">
                 <span class="text-black bg-info">Arrival</span>
                 <img class="date_cua" src="~/images/date.png">
@@ -23,6 +26,9 @@
                 <input class="form-control" placeholder="dd/mm/yyyy" type="date" asp-for="Expiry_Date">
                 <span class="text-danger" asp-validation-for="Expiry_Date"></span>
 
+            </div>
+            <div class="col-md-6">
+                <span style="font-size:20px;background-color:#333;margin:20px;border-radius:10px"><sub class="fs-4" style="font-size:20px"><del class="text-danger fw-bold fs-5">12$</del></sub>@data.Price</span>
             </div>
             <div class="col-md-12">
                 <button class="book_btn" type="submit">Book Now</button>

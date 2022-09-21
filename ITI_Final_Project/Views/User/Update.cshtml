@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+}
+@model Customer
+<h1 class="badge badge-primary p-4" style="font-size:25px">Update Profile</h1>
+
+<div class="container">
+
+    @if (Model == null)
+    {
+        <div class="m-4 " style="margin:20px auto">
+            <a class="alert alert-info text-black fs-5 w-100" style="font-size:20px;width:400px">No Data Here</a>
+
+        </div>
+    }
+
+
+    <div class="row justify-content-between">
+
+
+        <div class=" col-8">
+
+            <form class="col-12 m-4 p-5" method="post" asp-action="Update" asp-controller="User" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger" style="font-weight:bolder"></div>
+
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Password" />
+
+                <div class="col-6 p-4">
+                    <label asp-for="Name">Name</label>
+                    <input type="text" asp-for="Name" placeholder="Name" class="form-control">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-6 p-4">
+                    <label asp-for="Phone_Number">Phone Number</label>
+                    <input type="text" asp-for="Phone_Number" placeholder="Phone Number" class="form-control">
+                    <span asp-validation-for="Phone_Number" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="National_Id">National</label>
+                    <select asp-for="National_Id" class="form-control" asp-items="@(SelectList)ViewBag.Nation">
+                        <option value="" class="text-muted">Chose Nationality</option>
+                    </select>
+                    <span asp-validation-for="National_Id" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Notional_Number">Notional Number</label>
+                    <input type="text" asp-for="Notional_Number" placeholder="National Number" class="form-control">
+                    <span asp-validation-for="Notional_Number" class="text-danger"></span>
+                </div>
+                <div class="col-6 p-4">
+                    <label asp-for="Email">Email</label>
+                    <input type="email" asp-for="Email" placeholder="Email" class="form-control">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="col-6 p-4 " >
+                    <div id="pass" >
+                        <span class="text-danger">Type Password to confirm</span>
+                        <label asp-for="Password">Password</label>
+                        <input type="password"  placeholder="password" class="form-control">
+              
+                    </div>
+           
+                    <script>
+                        var content = document.querySelector(".pass inpu");
+                        content.value = "";
+
+
+                    </script>
+                </div>
+       
+                <div class="col-6 p-4 ">
+                    <a class="btn btn-primary fs-5 text-white" style="font-size:20px" id="Change">Change Photo</a>
+                    <div class="custom-file d-none" id="Custom-file">
+                        <input type="file" asp-for="Img" class="custom-file-input" />
+                        <label asp-for="Img" class="custom-file-label"></label><br />
+                        <span asp-validation-for="Img" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-6 p-4">
+                    <input type="submit" class="btn btn-success" value="Add" />
+                    <input type="reset" class="btn btn-warning" value="Clear" />
+                    <a asp-action="Index" asp-controller="User" class="btn btn-primary">Return</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-4  " id="poster-container">
+            <img src="~/Imgs/@Model.Img" />
+        </div>
+    </div>
+
+
+
+</div>
+@section Scripts{
+
+    <script src="~/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('#Change').on('click', function () {
+            var Customfile = $('#Custom-file');
+            Customfile.removeClass('d-none');
+            var posterContainer = $('#poster-container');
+            $("#Img").on("change", function () {
+                var SelectedFile = $(this).val().split('\\').pop();
+                $(this).siblings('label').text(SelectedFile);
+
+                var Image = window.URL.createObjectURL(this.files[0]);
+                posterContainer.find('img').attr('src', Image);
+            });
+            
+         
+
+
+        });
+    </script>
+}

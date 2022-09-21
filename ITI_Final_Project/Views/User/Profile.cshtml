@@ -4,6 +4,8 @@
 @{
     ViewBag.title = "Profile";
     Layout = "/Views/Shared/_Layout.cshtml";
+    Hotel_App db = new Hotel_App();
+    bool? data = db.Customers.Where(m => m.IsAdmin == true).Any();
 }
 @model Customer
 
@@ -29,18 +31,22 @@
 
             <label><strong>National: </strong>@Model.National.Name</label>
         </div>
-        <div class="col">
+        @if (data == false)
+        {
+            <div class="col">
 
-            <label><strong>My Reversaion: </strong><a class="btn btn-primary text-white fs-4 " asp-action="MyReversaion" asp-controller="Opration">MyReversaion</a></label>
-        </div>
-   
+                <label><strong>My Reversaion: </strong><a class="btn btn-primary text-white fs-4 " asp-action="MyReversaion" asp-controller="Opration">MyReversaion</a></label>
+            </div>
+        }
+
+
     </div>
     <div class="col-md-4">
         <img src="~/Imgs/@Model.Img" style="border-radius:10px"/>
 
     </div>
     <div class="m-4">
-        <a class="btn btn-primary text-white fs-4 ">Update Profile</a>
+        <a class="btn btn-primary text-white fs-4 " asp-action="Update" asp-controller="User" asp-route-Id="@Model.Id">Update Profile</a>
     </div>
 </div>
 

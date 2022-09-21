@@ -18,31 +18,10 @@ namespace ITI_Final_Project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var data = db.Rooms.ToList();
+            return View(data);
         }
-        [HttpPost]
-    public IActionResult Index(Customer model)
-        {
-            if (model!=null)
-            {
-                var data = new Contact_U()
-                {
-                    Id = model.Id,
-           
-                };
          
-                db.SaveChanges();
-
-               
-               
-                return RedirectToAction("Box");
-            }
-            else
-            {
-                return View();
-            }
-
-        }
         public IActionResult Privacy()
         {
             return View();
@@ -116,14 +95,14 @@ namespace ITI_Final_Project.Controllers
             }
             else return View();
         }
-        [HttpPost]
-        public async Task<IActionResult>Delete(int? Id)
+ 
+        public  IActionResult Delete(int? Id)
         {
 
-            var data =  await db.Rooms.FindAsync(Id);
+            var data = db.Rooms.Where(m => m.Room_number == Id).FirstOrDefault();
              db.Remove(data);
-            await db.SaveChangesAsync();
-             return View();
+           db.SaveChanges();
+             return RedirectToAction("OurRoom");
         }
     }
 }

@@ -13,12 +13,9 @@
             </th>
             <th>
                 Our Room
-            </th>
+            </th>      
             <th>
-                Gallery
-            </th>
-            <th>
-                Blog
+               Cleaners
             </th>
         </tr>
     </thead>
@@ -31,10 +28,17 @@
             </td>
             <td>
                 <a class="btn btn-primary text-white fs-4" asp-controller="Home" asp-action="OurRoom">Viwe</a>
-       
                 <a class="btn btn-success text-white fs-4" asp-controller="Opration" asp-action="Create_Room">Create</a>
 
-            </td>
+            </td> 
+
+                 <td>
+                <a class="btn btn-primary text-white fs-4" asp-controller="Admin" asp-action="index">Viwe</a>
+                <a class="btn btn-success text-white fs-4" asp-controller="Admin" asp-action="AddEmployee">Create</a>
+
+            </td> 
+     
+            
         </tr>
     </tbody>
 </table>

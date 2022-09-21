@@ -63,6 +63,7 @@
 </section>
 <!-- end banner -->
 <!-- about -->
+@model List<Room>
 <div class="about">
     <div class="container-fluid">
         <div class="row">
@@ -71,7 +72,7 @@
                     <h2>About Us</h2>
                     <p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it's seen all around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum. </p>
 
-                    <a class="read_more" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Details" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )"> Read More</a>
+                    <a class="read_more" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Details" )" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Opration" )"> Read More</a>
                 </div>
             </div>
             <div class="col-md-7">
@@ -94,74 +95,34 @@
                 </div>
             </div>
         </div>
+       
+
         <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room1.jpg" alt="#" /></figure>
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="col-md-4 col-sm-6">
+
+
+
+                        <div id="serv_hover" class="room">
+                            <div class="room_img">
+                                <figure><img src="~/Rooms/@item.Img" alt="#" /></figure>
+                            </div>
+                            <div class="bed_room">
+                                <a class="btn btn-primary text-white fs-4" asp-route-Id="@item.Room_number" asp-action="@(Context.Session.GetInt32("UserId") == null ? "Login" : "Reversation" )" asp-controller="@(Context.Session.GetInt32("UserId") == null ? "User" : "Opration" )">Bed Room</a>
+                                <p>@item.Description</p>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room2.jpg" alt="#" /></figure>
-                    </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room3.jpg" alt="#" /></figure>
-                    </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room4.jpg" alt="#" /></figure>
-                    </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room5.jpg" alt="#" /></figure>
-                    </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div id="serv_hover" class="room">
-                    <div class="room_img">
-                        <figure><img src="~/images/room6.jpg" alt="#" /></figure>
-                    </div>
-                    <div class="bed_room">
-                        <a class="btn btn-primary text-white fs-4" asp-action="@(Context.Session.GetInt32("UserId")==null ? "Login":"Order" )" asp-controller="@(Context.Session.GetInt32("UserId")==null ? "User":"Opration" )">Bed Room</a>
-                        <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there </p>
-                    </div>
-                </div>
-            </div>
+                }
+            }
+           
+           
+           
         </div>
+        
     </div>
 </div>
 <!-- end our_room -->

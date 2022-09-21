@@ -28,7 +28,8 @@ namespace ITI_Final_Project.Controllers
         public IActionResult Order()
         {
 
-            return View();
+            var data = db.Rooms.ToList();
+            return View(data);
         }
         public IActionResult Update()
         {
@@ -60,8 +61,15 @@ namespace ITI_Final_Project.Controllers
 
         public IActionResult Reversation(int? Id)
         {
-            ViewBag.Id = Id;
-            return View();
+            var data = new Revevarstion()
+            {
+                Room_Number = Id,
+             
+            };
+
+            
+
+            return View(data);
 
         }
         [HttpPost]
@@ -106,7 +114,7 @@ namespace ITI_Final_Project.Controllers
             {
                 int? x= HttpContext.Session.GetInt32("UserId");
 
-                var data = db.Revevarstions.Include(m => m.Customer).Where(m => m.Customer_Id == x).Include(m=>m.Room_NumberNavigation).ToList();
+                var data = db.Revevarstions.Include(m => m.Customer).Where(m => m.Customer_Id == x).ToList();
                 if (data!=null)
                 {
 
@@ -116,6 +124,63 @@ namespace ITI_Final_Project.Controllers
             }
             return View();
         }
+
+        #region Crud User
+
+        public  IActionResult MyReversaion_Delete(int? Id)
+        {
+            var data = db.Revevarstions.Include(m=>m.Customer).Include(m=>m.Room_NumberNavigation).Where(m=>m.Reservatation_Number==Id).FirstOrDefault();
+            if (data != null)
+            {
+                return View(data);
+            }
+            
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult MyReversaion_Delete(Revevarstion model)
+        {
+            var data = db.Revevarstions.Where(m => m.Reservatation_Number == model.Reservatation_Number).FirstOrDefault();
+            if (data!=null)
+            {
+                db.Revevarstions.Remove(data);
+                db.SaveChanges();
+                return RedirectToAction("MyReversaion");
+            }
+            return View(model);
+        }
+
+        public IActionResult MyReversaion_Update(int? Id)
+        {
+
+            var data = db.Revevarstions.Include(m => m.Customer).Include(m => m.Room_NumberNavigation).Where(m => m.Reservatation_Number == Id).FirstOrDefault();
+            if (data != null)
+            {
+                return View(data);
+            }
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult MyReversaion_Update(Revevarstion model)
+        {
+
+            var data = db.Revevarstions.Where(m=>m.Reservatation_Number==model.Reservatation_Number).FirstOrDefault();
+            if (data != null)
+            {
+                data.Reservation_Date = DateTime.Now;
+                data.Room_Number = model.Room_Number;
+                data.Customer_Id = model.Customer_Id;
+                data.Expiry_Date = model.Expiry_Date;
+                db.SaveChanges();
+                return RedirectToAction("MyReversaion");
+            }
+            return View(model);
+        }
+
+        #endregion
     }
-  
+
 }

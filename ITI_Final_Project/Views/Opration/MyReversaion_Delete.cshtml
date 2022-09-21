@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.title = "MyReversaion_Delete";
+}
+@model Revevarstion
+<h1>MyReversaion_Delete</h1>
+<div class="container">
+    @{ if (Model == null)
+        {
+        <a class="alert alert-info text-black fs-4">No Data </a>
+         
+        }
+
+            else
+            {
+<div class="col-md-6">
+    <form method="post" asp-controller="Opration" asp-action="MyReversaion_Delete">
+        <input type="hidden" asp-for="@Model.Reservatation_Number"/>
+        <div class="card m-2">
+            <div class="card-body">
+
+
+                <h2><strong>Name:</strong>@Model.Customer.Name</h2>
+                <br />
+                <span>
+                    <strong>RoomNumber:</strong>	@Model.Room_NumberNavigation.Room_number
+                </span>
+                <br />
+                <span><strong>Expiry_Date:</strong>@Model.Expiry_Date</span>
+            </div>
+            <center>
+                <input type="submit" class="btn btn-primary text-white fs-4" value="Delete" />
+                <a class="btn btn-warning btn-sm text-white">Return</a>
+            </center>
+        </div>
+    </form>
+</div>
+            }
+
+        }
+
+</div>
+

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "MyReversaion_Update";
+}
+
+<h1>MyReversaion_Update</h1>
+
+@model Revevarstion
+
+
+<div class="container">
+    @{ if (Model == null)
+        {
+        <a class="alert alert-info text-black fs-4">No Data </a>
+         
+        }
+
+            else
+            {
+<div class="col-md-6">
+    <form method="post" asp-controller="Opration" asp-action="MyReversaion_Update">
+        <input type="hidden" asp-for="@Model.Reservatation_Number"/>
+        <input type="hidden" asp-for="@Model.Customer_Id"/>
+        <input type="hidden" asp-for="@Model.Room_Number"/>
+        <div class="card m-2">
+            <div class="card-body">
+
+
+                <h2><strong>Name:</strong>@Model.Customer.Name</h2>
+                <br />
+                <span>
+                    <strong>RoomNumber:</strong>	@Model.Room_Number
+                </span>
+                <br />
+                <label >Expiry_Date</label>
+                <input class="form-control" placeholder="Expiry_Date" type="date" asp-for="Expiry_Date"/>
+            </div>
+            <center>
+                <input type="submit" class="btn btn-primary text-white fs-4 btn-sm" value="Update" />
+                <a class="btn btn-success btn-sm text-white" asp-controller="Opration" asp-action="MyReversaion">Return</a>
+            </center>
+        </div>
+    </form>
+</div>
+            }
+
+        }
+
+</div>

@@ -25,7 +25,7 @@ namespace ITI_Final_Project.Controllers
             else
             {
 
-                var data = db.Customers.ToList();
+                var data = db.Customers.Include(m=>m.National).ToList();
                 return View(data);
             }
 
@@ -125,7 +125,7 @@ namespace ITI_Final_Project.Controllers
             }
             else
             {
-
+               
                 var data = db.Customers.Where(n => n.Id == Id).Include(m=>m.National).FirstOrDefault();
                 return View(data);
             }
@@ -133,6 +133,58 @@ namespace ITI_Final_Project.Controllers
         }
 
         #endregion
+        public IActionResult Update(int? Id)
+        {
+            List<Nationalty> Nation = db.Nationalties.ToList();
+            ViewBag.Nation = new SelectList(Nation, "Id", "Name");
+            var data = db.Customers.Where(n => n.Id == Id).Include(m => m.National).FirstOrDefault();
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Update(Customer model,IFormFile Img)
+        {
+    
+           
 
+            var OldData=db.Customers.Where(m=>m.Id==model.Id).Include(m => m.National).FirstOrDefault();
+                if (OldData != null)
+                {
+                    OldData.Name = model.Name;
+                    OldData.National_Id = model.National_Id;
+                    OldData.Phone_Number=model.Phone_Number;
+                    OldData.Notional_Number = model.Notional_Number;
+                    OldData.Email = model.Email;
+                if (Img != null)
+                {
+
+                    model.Img = UploadFiles.UploaderFiles("Imgs", Img);
+                    OldData.Img = model.Img;
+
+                }
+                else
+                {
+                    OldData.Img = OldData.Img;
+                }
+                bool? query = db.Customers.Where(m=>m.Password.Equals(model.Password)).Any();
+                if (query==true)
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Profile");
+                }
+                else
+                {
+                    return View(model);
+                }
+                
+                }
+                return View(model);
+
+
+        //    var query = (from c in db.Emp
+        //                 from d in db.EmpDetails
+        //                 where c.ID == d.ID && c.FirstName == "A" && c.LastName == "D"
+        //                 select c
+        //).Any();
+        }
     }
 }
